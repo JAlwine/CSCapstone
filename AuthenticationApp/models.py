@@ -13,7 +13,7 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 class MyUserManager(BaseUserManager):
 
-    def create_user(self, email=None, password=None, first_name=None, last_name=None):
+    def create_user(self, email=None, password=None, first_name=None, last_name=None, user_type=None):
         if not email:
             raise ValueError('Users must have an email address')
 
@@ -21,6 +21,15 @@ class MyUserManager(BaseUserManager):
         # Only the email field is required
         user = self.model(email=email)
         user.last_name = last_name
+        user.first_name = first_name
+
+        print("Creating user with type: " + str(user_type))
+
+        if (user_type == 'STU'):
+            user.is_student = True
+        elif (user_type == 'TEACH'):
+            user.is_professor = True
+
         user.set_password(password)
 
         # If first_name is not present, set it as email's username by default
@@ -104,6 +113,7 @@ class Student(models.Model):
         MyUser,
         on_delete=models.CASCADE,
         primary_key=True)
+    is_student=True
 
     def get_full_name(self):
         return "%s %s" % (self.user.first_name, self.user.last_name)
@@ -154,4 +164,4 @@ class Teacher(models.Model):
 
     @property
     def is_staff(self):
-        return False
+        return True

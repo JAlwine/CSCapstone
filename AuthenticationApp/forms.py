@@ -13,6 +13,11 @@ class LoginForm(forms.Form):
 
 
 class RegisterForm(forms.Form):
+    USER_TYPES = (
+        ('STU', 'Student'),
+        ('TEACH', 'Teacher'),
+    )
+
     """A form to creating new users. Includes all the required
     fields, plus a repeated password."""
     email = forms.CharField(
@@ -28,6 +33,8 @@ class RegisterForm(forms.Form):
         label="Last name", widget=forms.TextInput, required=False)
 
     # Add field for selecting type of user (Student, Teacher, ...)
+    user_type = forms.ChoiceField(choices=USER_TYPES, required=True)
+
 
     def clean_password2(self):
         # Check that the two password entries match
