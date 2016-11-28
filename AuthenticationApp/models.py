@@ -1,7 +1,4 @@
-"""AuthenticationApp Models
-
-Created by Naman Patwari on 10/4/2016.
-"""
+"""AuthenticationApp Models"""
 
 from __future__ import unicode_literals
 from django.db import models
@@ -27,6 +24,8 @@ class MyUserManager(BaseUserManager):
 
         if (user_type == 'STU'):
             user.is_student = True
+        if (user_type == 'ENG'):
+            user.is_engineer = True;
         elif (user_type == 'TEACH'):
             user.is_professor = True
 
@@ -72,7 +71,7 @@ class MyUser(AbstractBaseUser):
     # New fields added
     is_student = models.BooleanField(default=False,)
     is_professor = models.BooleanField(default=False,)
-    # is_engineer = models.BooleanField(default=False,)
+    is_engineer = models.BooleanField(default=False,)
 
     objects = MyUserManager()
 
@@ -143,7 +142,7 @@ class Teacher(models.Model):
         MyUser,
         on_delete=models.CASCADE,
         primary_key=True)
-
+    is_teacher=True
     def get_full_name(self):
         return "%s %s" % (self.user.first_name, self.user.last_name)
 
@@ -164,4 +163,33 @@ class Teacher(models.Model):
 
     @property
     def is_staff(self):
+        return True
+
+class Engineer(models.Model):
+    user = models.OneToOneField(
+        MyUser,
+        on_delete=models.CASCADE,
+        primary_key=True)
+    is_engineer=True
+    def get_full_name(self):
+        return "%s %s" % (self.user.first_name, self.user.last_name)
+
+    def get_short_name(self):
+        return self.user.first_name
+
+    def __str__(self):  # Python 3
+        return self.user.email
+
+    def __unicode__(self):           # Python 2
+        return self.user.email
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
+
+    @property
+    def is_staff(self):
+        #is engineer type-staff or type-engineer?
         return True

@@ -1,7 +1,4 @@
-"""AuthenticationApp Views
-
-Created by Naman Patwari on 10/4/2016.
-"""
+"""AuthenticationApp Views"""
 
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
@@ -11,7 +8,7 @@ from django.contrib import messages
 
 
 from .forms import LoginForm, RegisterForm, UpdateForm
-from .models import MyUser, Student, Teacher
+from .models import MyUser, Student, Teacher, Engineer
 
 # Auth Views
 
@@ -68,6 +65,10 @@ def auth_register(request):
         if (user_type == 'STU'):
             new_student = Student(user=new_user)
             new_student.save()
+        #not sure if it will be this easy or not
+        if (user_type == 'ENG'):
+            new_engineer = Engineer(user=new_user)
+            new_engineer.save()
         else:
             new_teacher = Teacher(user=new_user)
             new_teacher.save()

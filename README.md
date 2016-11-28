@@ -49,3 +49,4 @@ CS390 Students: Please refer to the [grading form](https://docs.google.com/docum
 @harrischristiansen (http://www.harrischristiansen.com)  
 @thenamanpat  
 @dunbarj (http://www.jacobfdunbar.com)
+>>>>>>> a01a1d6d0abda7862339e65cd614c819fe32c3f1

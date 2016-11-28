@@ -1,13 +1,10 @@
-"""AuthenticationApp Admin
-
-Created by Naman Patwari on 10/4/2016.
-"""
+"""AuthenticationApp Admin"""
 
 from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from .models import MyUser, Student
+from .models import MyUser, Student, Teacher, Engineer
 from .forms import AdminUserCreationForm, UserChangeForm
 
 
@@ -42,4 +39,6 @@ class UserAdmin(BaseUserAdmin):
 # Now register the new UserAdmin...
 admin.site.register(MyUser, UserAdmin)
 admin.site.register(Student)
+admin.site.register(Teacher)
+admin.site.register(Engineer)
 admin.site.unregister(Group)

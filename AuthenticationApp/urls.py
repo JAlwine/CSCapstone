@@ -1,7 +1,4 @@
-"""AuthenticationApp URL Configuration
-
-Created by Naman Patwari on 10/4/2016.
-"""
+"""AuthenticationApp URL Configuration"""
 
 from django.conf.urls import url
 

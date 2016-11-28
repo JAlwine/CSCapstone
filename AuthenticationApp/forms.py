@@ -1,7 +1,5 @@
-"""AuthenticationApp Forms
+"""AuthenticationApp Forms"""
 
-Created by Naman Patwari on 10/4/2016.
-"""
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django import forms
 from .models import MyUser
@@ -16,6 +14,7 @@ class RegisterForm(forms.Form):
     USER_TYPES = (
         ('STU', 'Student'),
         ('TEACH', 'Teacher'),
+        ('ENG', 'Engineer')
     )
 
     """A form to creating new users. Includes all the required
@@ -136,7 +135,7 @@ class UserChangeForm(forms.ModelForm):
     class Meta:
         model = MyUser
         fields = ('email', 'password', 'first_name',
-                  'last_name', 'is_active', 'is_admin')
+                  'last_name', 'is_active', 'is_admin')#is_staff  ??
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
