@@ -10,7 +10,7 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 class MyUserManager(BaseUserManager):
 
-    def create_user(self, email=None, password=None, first_name=None, last_name=None, user_type=None, test_field=None):
+    def create_user(self, email=None, password=None, first_name=None, last_name=None, user_type=None, university_name=None, contact_info=None):
         if not email:
             raise ValueError('Users must have an email address')
 
@@ -19,6 +19,9 @@ class MyUserManager(BaseUserManager):
         user = self.model(email=email)
         user.last_name = last_name
         user.first_name = first_name
+        user.user_type=user_type
+        user.university_name=university_name
+        user.contact_info=contact_info
 
         print("Creating user with type: " + str(user_type))
 
@@ -38,7 +41,7 @@ class MyUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email=None, password=None, first_name=None, last_name=None, test_field=None):
+    def create_superuser(self, email=None, password=None, first_name=None, last_name=None, university_name=None, contact_info=None):
         user = self.create_user(email, password=password,
                                 first_name=first_name, last_name=last_name)
         user.is_admin = True
@@ -65,7 +68,13 @@ class MyUser(AbstractBaseUser):
         blank=True,
     )
 
-    test_field = models.CharField(
+    university_name = models.CharField(
+        max_length=120,
+        null=True,
+        blank=True,
+    )
+
+    contact_info = models.CharField(
         max_length=120,
         null=True,
         blank=True,
