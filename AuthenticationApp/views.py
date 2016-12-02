@@ -59,7 +59,8 @@ def auth_register(request):
                                                   "password2"],
                                               first_name=form.cleaned_data['firstname'], last_name=form.cleaned_data['lastname'],
                                               user_type=user_type, university_name=form.cleaned_data['universityname'],
-                                              phone_number=form.cleaned_data['phonenumber'], home_address=form.cleaned_data['homeaddress']
+                                              phone_number=form.cleaned_data['phonenumber'], home_address=form.cleaned_data['homeaddress'],
+                                              about_description=form.cleaned_data['aboutuser']
                                               )
         new_user.save()
         # Also registering students

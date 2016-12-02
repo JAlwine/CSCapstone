@@ -10,7 +10,7 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 class MyUserManager(BaseUserManager):
 
-    def create_user(self, email=None, password=None, first_name=None, last_name=None, user_type=None, university_name=None, phone_number=None, home_address=None):
+    def create_user(self, email=None, password=None, first_name=None, last_name=None, user_type=None, university_name=None, phone_number=None, home_address=None, about_user=None):
         if not email:
             raise ValueError('Users must have an email address')
 
@@ -23,6 +23,7 @@ class MyUserManager(BaseUserManager):
         user.university_name=university_name
         user.phone_number=phone_number
         user.home_address=home_address
+        user.about_user=about_user
 
         print("Creating user with type: " + str(user_type))
 
@@ -42,7 +43,7 @@ class MyUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email=None, password=None, first_name=None, last_name=None, university_name=None, phone_number=None, home_address=None):
+    def create_superuser(self, email=None, password=None, first_name=None, last_name=None, university_name=None, phone_number=None, home_address=None, about_user=None):
         user = self.create_user(email, password=password,
                                 first_name=first_name, last_name=last_name)
         user.is_admin = True
@@ -81,6 +82,12 @@ class MyUser(AbstractBaseUser):
         blank=True,
     )
     home_address = models.CharField(
+        max_length=120,
+        null=True,
+        blank=True,
+    )
+
+    about_user = models.CharField(
         max_length=120,
         null=True,
         blank=True,
