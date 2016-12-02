@@ -33,8 +33,10 @@ class RegisterForm(forms.Form):
         label="Last name", widget=forms.TextInput, required=False)
     universityname = forms.CharField(
         label="University", widget=forms.TextInput, required=False)
-    contactinfo = forms.CharField(
-        label="Contact info", widget=forms.TextInput, required=False)
+    phonenumber = forms.CharField(
+        label="Phone number", widget=forms.TextInput, required=False)
+    homeaddress = forms.CharField(
+        label="Home address", widget=forms.TextInput, required=False)
 
     # Add field for selecting type of user (Student, Teacher, ...)
     user_type = forms.ChoiceField(choices=USER_TYPES, required=True)
@@ -70,7 +72,7 @@ class UpdateForm(forms.ModelForm):
 
     class Meta:
         model = MyUser
-        fields = ('email', 'password', 'first_name', 'last_name', 'university_name', 'contact_info')
+        fields = ('email', 'password', 'first_name', 'last_name', 'university_name', 'phone_number', 'home_address')
 
     def clean_password(self):
         return self.initial["password"]
@@ -111,7 +113,7 @@ class AdminUserCreationForm(forms.ModelForm):
 
     class Meta:
         model = MyUser
-        fields = ('email', 'first_name', 'last_name', 'university_name', 'contact_info')
+        fields = ('email', 'first_name', 'last_name', 'university_name', 'home_address', 'phone_number')
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -140,7 +142,7 @@ class UserChangeForm(forms.ModelForm):
     class Meta:
         model = MyUser
         fields = ('email', 'password', 'first_name',
-                  'last_name', 'university_name', 'contact_info', 'is_active', 'is_admin')#is_staff  ??
+                  'last_name', 'university_name', 'phone_number', 'home_address','is_active', 'is_admin')#is_staff  ??
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
