@@ -17,8 +17,10 @@
                 <input type="file" name="photo" />
                 <br>
 				<label for="description">University Description</label>
-				<input type="text" name="description" id="description" placeholder="Description" class="form-control" data-bvalidator="required" data-bvalidator-msg="Description Required">
-				<br>
+
+                <input type="text" name="description" id="description" placeholder="Description" class="form-control" data-bvalidator="required" data-bvalidator-msg="Description Required">
+
+                <br>
                 <label for="website">Website</label>
 				<input type="text" name="website" id="website" placeholder="Website" class="form-control">
 				<br>
@@ -26,4 +28,12 @@
 			</form>
 		</div>
     </div>
+
+    <!-- TinyMCE Editor JS -->
+    <!--<textarea></textarea>-->
+ 	<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
+
 {% endblock %}
+
+

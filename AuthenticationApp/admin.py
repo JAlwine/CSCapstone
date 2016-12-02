@@ -36,6 +36,8 @@ class UserAdmin(BaseUserAdmin):
     ordering = ('email', 'first_name')
     filter_horizontal = ()
 
+
+
 # Now register the new UserAdmin...
 admin.site.register(MyUser, UserAdmin)
 admin.site.register(Student)
