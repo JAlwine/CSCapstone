@@ -12,6 +12,15 @@ from .models import MyUser, Student, Teacher, Engineer
 
 # Auth Views
 
+def getProfiles(request):
+    if request.user.is_authenticated():
+        profiles_list = MyUser.objects.all()
+        context = {
+            'profiles' : profiles_list,
+        }
+        return render(request, 'profiles.html', context)
+    # render error page if user is not logged in
+    return render(request, 'autherror.html')
 
 def auth_login(request):
     form = LoginForm(request.POST or None)
