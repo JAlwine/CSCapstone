@@ -23,6 +23,10 @@ tinymce.init({
  			'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc'],
  	toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
  	toolbar2: 'print preview media | forecolor backcolor emoticons | codesample',
+	// ===========================================
+    // SET RELATIVE_URLS to FALSE (This is required for images to display properly)
+    // ===========================================
+	relative_urls: false,
  	image_advtab: true,
  	templates: [
  		{ title: 'Test template 1', content: 'Test 1' },

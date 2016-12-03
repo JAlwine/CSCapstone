@@ -74,8 +74,8 @@ class UpdateForm(forms.ModelForm):
 
     class Meta:
         model = MyUser
-        fields = ('email', 'password', 'first_name', 'last_name', 'university_name', 'phone_number', 'home_address', 'about_user')
-        widgets = { 'about_user':forms.Textarea() }
+        fields = ('email', 'password', 'user_type', 'first_name', 'last_name', 'university_name', 'phone_number', 'home_address', 'about_user')
+        widgets = { 'about_user':forms.Textarea(), 'user_type':forms.TextInput(attrs={'readonly': 'readonly'})}
 
     def clean_password(self):
         return self.initial["password"]
@@ -116,7 +116,7 @@ class AdminUserCreationForm(forms.ModelForm):
 
     class Meta:
         model = MyUser
-        fields = ('email', 'first_name', 'last_name', 'university_name', 'home_address', 'about_user','phone_number')
+        fields = ('email', 'first_name', 'user_type','last_name', 'university_name', 'home_address', 'about_user','phone_number')
         widgets = {'about_user': forms.Textarea()}
 
     def clean_password2(self):
@@ -146,7 +146,7 @@ class UserChangeForm(forms.ModelForm):
     class Meta:
         model = MyUser
         fields = ('email', 'password', 'first_name',
-                  'last_name', 'university_name', 'phone_number', 'home_address','about_user', 'is_active', 'is_admin')#is_staff  ??
+                  'last_name', 'user_type', 'university_name', 'phone_number', 'home_address','about_user', 'is_active', 'is_admin')#is_staff  ??
         widgets = {'about_user': forms.Textarea()}
 
     def clean_password(self):
