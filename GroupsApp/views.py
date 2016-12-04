@@ -30,7 +30,7 @@ def getGroup(request):
     return render(request, 'autherror.html')
 
 def getGroupForm(request):
-    if request.user.is_authenticated() and request.user.is_student:
+    if request.user.is_authenticated() and request.user.user_type == 'STU':
         return render(request, 'groupform.html')
     # render error page if user is not logged in
     return render(request, 'autherror.html')
