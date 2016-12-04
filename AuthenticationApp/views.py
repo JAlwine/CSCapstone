@@ -25,22 +25,25 @@ def getProfiles(request):
             'profiles' : profiles_list,
         }
         return render(request, 'profiles.html', context)
+
     # render error page if user is not logged in
     return render(request, 'autherror.html')
 
 def getProfile(request):
     if request.user.is_authenticated():
         in_email = request.GET.get('email', 'None')
-        this_profile = MyUser.objects.get(email__exact=in_email)
+        this_user = MyUser.objects.get(email__exact=in_email)
+        this_student = Student.objects.get(user_id__exact=this_user.id)
 
         context = {
-            'profile' : this_profile
+            'user' : this_user,
+            'student' : this_student,
         }
 
-        if (this_profile.user_type == "PROF"):
+        if (this_user.user_type == "PROF"):
             return render(request, 'teacherProfile.html', context)
 
-        elif (this_profile.user_type == "ENG"):
+        elif (this_user.user_type == "ENG"):
             return render(request, 'engineerProfile.html', context)
         else: # Student
             return render(request, 'studentProfile.html', context)
@@ -164,6 +167,8 @@ def auth_register_student(request):
         new_user.save()
         # Also registering students
         new_student = Student(user=new_user)
+        new_student.languages = form.cleaned_data['languages']
+        new_student.experience = form.cleaned_data['yearsExperiance']
         new_student.save()
 
         login(request, new_user)

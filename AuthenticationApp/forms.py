@@ -11,11 +11,6 @@ class LoginForm(forms.Form):
 
 
 class RegisterFormEngineer(forms.Form):
-    USER_TYPES = (
-        ('STU', 'Student'),
-        ('TEACH', 'Teacher'),
-        ('ENG', 'Engineer')
-    )
 
     """A form to creating new users. Includes all the required
     fields, plus a repeated password."""
@@ -63,11 +58,6 @@ class RegisterFormEngineer(forms.Form):
                 "There was an error, please contact us later")
 
 class RegisterFormTeach(forms.Form):
-    USER_TYPES = (
-        ('STU', 'Student'),
-        ('TEACH', 'Teacher'),
-        ('ENG', 'Engineer')
-    )
 
     """A form to creating new users. Includes all the required
     fields, plus a repeated password."""
@@ -113,12 +103,6 @@ class RegisterFormTeach(forms.Form):
                 "There was an error, please contact us later")
 
 class RegisterFormStu(forms.Form):
-    USER_TYPES = (
-        ('STU', 'Student'),
-        ('TEACH', 'Teacher'),
-        ('ENG', 'Engineer')
-    )
-
     """A form to creating new users. Includes all the required
     fields, plus a repeated password."""
 

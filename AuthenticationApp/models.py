@@ -133,7 +133,17 @@ class Student(models.Model):
         on_delete=models.CASCADE,
         primary_key=True)
 
+    experience = models.CharField(
+        max_length=120,
+        null=True,
+        blank=True,
+    )
 
+    languages = models.CharField(
+        max_length=120,
+        null=True,
+        blank=True,
+    )
 
     def get_full_name(self):
         return "%s %s" % (self.user.first_name, self.user.last_name)
