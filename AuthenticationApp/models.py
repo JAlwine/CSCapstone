@@ -25,15 +25,6 @@ class MyUserManager(BaseUserManager):
         user.home_address=home_address
         user.about_user=about_user
 
-        print("Creating user with type: " + str(user_type))
-
-        if (user_type == 'STU'):
-            user.is_student = True
-        if (user_type == 'ENG'):
-            user.is_engineer = True;
-        elif (user_type == 'TEACH'):
-            user.is_professor = True
-
         user.set_password(password)
 
         # If first_name is not present, set it as email's username by default
@@ -101,10 +92,6 @@ class MyUser(AbstractBaseUser):
     is_active = models.BooleanField(default=True,)
     is_admin = models.BooleanField(default=False,)
 
-    # New fields added
-    is_student = models.BooleanField(default=False,)
-    is_professor = models.BooleanField(default=False,)
-    is_engineer = models.BooleanField(default=False,)
 
     objects = MyUserManager()
 
@@ -145,7 +132,8 @@ class Student(models.Model):
         MyUser,
         on_delete=models.CASCADE,
         primary_key=True)
-    is_student=True
+
+
 
     def get_full_name(self):
         return "%s %s" % (self.user.first_name, self.user.last_name)
@@ -175,7 +163,7 @@ class Teacher(models.Model):
         MyUser,
         on_delete=models.CASCADE,
         primary_key=True)
-    is_teacher=True
+
     def get_full_name(self):
         return "%s %s" % (self.user.first_name, self.user.last_name)
 
@@ -203,7 +191,7 @@ class Engineer(models.Model):
         MyUser,
         on_delete=models.CASCADE,
         primary_key=True)
-    is_engineer=True
+
     def get_full_name(self):
         return "%s %s" % (self.user.first_name, self.user.last_name)
 

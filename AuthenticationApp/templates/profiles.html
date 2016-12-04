@@ -17,9 +17,9 @@
 				<tbody>
                     {% for item in profiles %}
                     <tr>
-			<td><a href="/profile?email={{ item.email }}">{{ item.first_name }} {{ item.last_name }}</td>
+                        <td><a href="/profile?email={{ item.email }}"> {{ item.first_name }} {{ item.last_name }}</a></td>
                         <td>{{ item.about_user }}</td>
-			<td>{{ item.email }}</a></td>
+			<td>{{ item.email }}</td>
                     </tr>
                     {% endfor %}
 				</tbody>

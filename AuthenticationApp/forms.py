@@ -10,7 +10,7 @@ class LoginForm(forms.Form):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
 
 
-class RegisterForm(forms.Form):
+class RegisterFormEngineer(forms.Form):
     USER_TYPES = (
         ('STU', 'Student'),
         ('TEACH', 'Teacher'),
@@ -32,16 +32,116 @@ class RegisterForm(forms.Form):
     lastname = forms.CharField(
         label="Last name", widget=forms.TextInput, required=False)
     universityname = forms.CharField(
+        label="Alma Mater", widget=forms.TextInput, required=False)
+    phonenumber = forms.CharField(
+        label="Phone number", widget=forms.TextInput, required=False)
+    homeaddress = forms.CharField(
+        label="Home address", widget=forms.TextInput, required=False)
+    aboutuser=forms.CharField(
+        label="About Engineer", widget=forms.Textarea, required=False)
+
+
+
+    def clean_password2(self):
+        # Check that the two password entries match
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError("Passwords don't match")
+        return password2
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        # Check if email exists before
+        try:
+            exists = MyUser.objects.get(email=email)
+            raise forms.ValidationError("This email has already been taken")
+        except MyUser.DoesNotExist:
+            return email
+        except:
+            raise forms.ValidationError(
+                "There was an error, please contact us later")
+
+class RegisterFormTeach(forms.Form):
+    USER_TYPES = (
+        ('STU', 'Student'),
+        ('TEACH', 'Teacher'),
+        ('ENG', 'Engineer')
+    )
+
+    """A form to creating new users. Includes all the required
+    fields, plus a repeated password."""
+
+    email = forms.CharField(
+        label='Email', widget=forms.EmailInput, required=True)
+    password1 = forms.CharField(
+        label='Password', widget=forms.PasswordInput, required=True)
+    password2 = forms.CharField(
+        label='Password confirmation', widget=forms.PasswordInput, required=True)
+    firstname = forms.CharField(
+        label="First name", widget=forms.TextInput, required=False)
+    lastname = forms.CharField(
+        label="Last name", widget=forms.TextInput, required=False)
+    universityname = forms.CharField(
         label="University", widget=forms.TextInput, required=False)
     phonenumber = forms.CharField(
         label="Phone number", widget=forms.TextInput, required=False)
     homeaddress = forms.CharField(
         label="Home address", widget=forms.TextInput, required=False)
     aboutuser=forms.CharField(
-        label="About user", widget=forms.Textarea, required=False)
+        label="About Teacher", widget=forms.Textarea, required=False)
 
-    # Add field for selecting type of user (Student, Teacher, ...)
-    user_type = forms.ChoiceField(choices=USER_TYPES, required=True)
+
+    def clean_password2(self):
+        # Check that the two password entries match
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError("Passwords don't match")
+        return password2
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        # Check if email exists before
+        try:
+            exists = MyUser.objects.get(email=email)
+            raise forms.ValidationError("This email has already been taken")
+        except MyUser.DoesNotExist:
+            return email
+        except:
+            raise forms.ValidationError(
+                "There was an error, please contact us later")
+
+class RegisterFormStu(forms.Form):
+    USER_TYPES = (
+        ('STU', 'Student'),
+        ('TEACH', 'Teacher'),
+        ('ENG', 'Engineer')
+    )
+
+    """A form to creating new users. Includes all the required
+    fields, plus a repeated password."""
+
+    email = forms.CharField(
+        label='Email', widget=forms.EmailInput, required=True)
+    password1 = forms.CharField(
+        label='Password', widget=forms.PasswordInput, required=True)
+    password2 = forms.CharField(
+        label='Password confirmation', widget=forms.PasswordInput, required=True)
+    firstname = forms.CharField(
+        label="First name", widget=forms.TextInput, required=False)
+    lastname = forms.CharField(
+        label="Last name", widget=forms.TextInput, required=False)
+    universityname = forms.CharField(
+        label="University", widget=forms.TextInput, required=False)
+    yearsExperiance = forms.CharField(
+        label="Years of Experiance", widget=forms.TextInput, required=False)
+    languages = forms.CharField(
+        label="Programming Languages", widget=forms.TextInput, required=False)
+    aboutuser=forms.CharField(
+        label="About Student", widget=forms.Textarea, required=False)
+
+
 
 
     def clean_password2(self):
