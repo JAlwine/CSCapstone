@@ -1,0 +1,30 @@
+{% extends "body.html" %}
+
+{% block content %}
+
+    <!-- Content -->
+    <div class="container" role="main">
+		<div class="table-responsive">
+			<table class="table table-striped sortable">
+				<thead>
+                <h1>User Profiles</h1>
+					<tr>
+                        <th>Name</th>
+                        <th>About User</th>
+                        <th>E-Mail</th>
+					</tr>
+				</thead>
+				<tbody>
+                    {% for item in profiles %}
+                    <tr>
+			<td><a href="/profile?email={{ item.email }}">{{ item.first_name }} {{ item.last_name }}</td>
+                        <td>{{ item.about_user }}</td>
+			<td>{{ item.email }}</a></td>
+                    </tr>
+                    {% endfor %}
+				</tbody>
+			</table>
+		</div>
+    </div>
+
+{% endblock %}
