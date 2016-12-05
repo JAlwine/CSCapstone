@@ -118,6 +118,10 @@ class RegisterFormStu(forms.Form):
         label="Last name", widget=forms.TextInput, required=False)
     universityname = forms.CharField(
         label="University", widget=forms.TextInput, required=False)
+    phonenumber = forms.CharField(
+        label="Phone number", widget=forms.TextInput, required=False)
+    homeaddress = forms.CharField(
+        label="Home address", widget=forms.TextInput, required=False)
     yearsExperiance = forms.CharField(
         label="Years of Experiance", widget=forms.TextInput, required=False)
     languages = forms.CharField(
