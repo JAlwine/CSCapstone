@@ -11,6 +11,7 @@
 					<tr>
                         <th>Name</th>
                         <th>About User</th>
+                        <th>User Type</th>
                         <th>E-Mail</th>
 					</tr>
 				</thead>
@@ -19,7 +20,16 @@
                     <tr>
                         <td><a href="/profile?email={{ item.email }}"> {{ item.first_name }} {{ item.last_name }}</a></td>
                         <td>{{ item.about_user }}</td>
-			<td>{{ item.email }}</td>
+                        {% if item.user_type == "STU" %}
+                        <td> Student </td>
+                        {% elif item.user_type == "ENG" %}
+                        <td> Engineer </td>
+                        {% elif item.user_type == "PROF" %}
+                        <td> Professor </td>
+                        {% else %}
+                        <td>{{ item.user_type }}</td>
+                        {% endif %}
+                        <td>{{ item.email }}</td>
                     </tr>
                     {% endfor %}
 				</tbody>
