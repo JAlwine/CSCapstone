@@ -224,3 +224,7 @@ class Engineer(models.Model):
     def is_staff(self):
         #is engineer type-staff or type-engineer?
         return True
+
+class Bookmark(models.Model):
+    user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
+    project = models.ManyToManyField('ProjectsApp.Project')
