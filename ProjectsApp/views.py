@@ -67,11 +67,10 @@ def getProjectFormSuccess(request):
 					return render(request, 'projectform.html', {'error': 'Error: That Project name already exists!'})
 				new_project = models.Project(name=form.cleaned_data['name'], description=form.cleaned_data['description'],
 											 languages=form.cleaned_data['languages'], experience=form.cleaned_data['experience'],
-											 speciality=form.cleaned_data['speciality'])
+											 speciality=form.cleaned_data['speciality'], createdBy=request.user)
 				print("Creating a new group")
 				new_project.created_at = datetime.datetime.now()
 				new_project.updated_at = datetime.datetime.now()
-				new_project.createdBy.add(request.user)
 				print("Saving the new group")
 				new_project.save()
 				request.user.save()
