@@ -7,12 +7,12 @@
 		<div class="table-responsive">
             <h1>Student Profile</h1>
             <div class="jumbotron">
-                <h2>{{ user.last_name }}, {{ user.first_name }}</h2>
-		        <h4>Currently attending <a href="/universityuniversity?name={{ user.university_name }}">{{ user.university_name }}</a></h4>
+                <h2>{{ profile.last_name }}, {{ profile.first_name }}</h2>
+		        <h4>Currently attending <a href="/universityuniversity?name={{ profile.university_name }}">{{ profile.university_name }}</a></h4>
                 <h3>Contact Info</h3>
                 <tbody>
                     <tr>
-                        <tb><h5>Email: {{ user.email }}</h5></tb>
+                        <tb><h5>Email: {{ profile.email }}</h5></tb>
                         <tb><h5>Languages: {{ student.languages }}</h5></tb>
                         <tb><h5>Experiance: {{ student.experience }} years</h5></tb>
                     </tr>
