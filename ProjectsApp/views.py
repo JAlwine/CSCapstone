@@ -12,7 +12,7 @@ import datetime
 def getProjects(request):
 	projects_list = models.Project.objects.all()
 	return render(request, 'projects.html', {
-        'projects': projects_list,
+		'projects': projects_list,
 	})
 
 
@@ -44,20 +44,34 @@ def getProject(request):
 	return render(request, 'project.html', context)
 
 
-
 def getProjectForm(request):
 	if request.user.is_authenticated():
+		return render(request, 'projectform.html')
+	# render error page if user is not logged in
+	return render(request, 'autherror.html')
+
+
+def getProjectFormSuccess(request):
+	print("In function")
+	if request.user.is_authenticated():
+		print("User is Authenticated")
 		if request.method == 'POST':
+			print("Method is post")
 			form = forms.ProjectForm(request.POST)
+			print("Form is " + str(form.is_valid()))
 			if form.is_valid():
+				print("Form is valid")
 				if models.Project.objects.filter(name__exact=form.cleaned_data['name']).exists():
+					print("Group does not exist")
 					return render(request, 'projectform.html', {'error': 'Error: That Project name already exists!'})
 				new_project = models.Project(name=form.cleaned_data['name'], description=form.cleaned_data['description'],
 											 languages=form.cleaned_data['languages'], experience=form.cleaned_data['experience'],
 											 speciality=form.cleaned_data['speciality'])
+				print("Creating a new group")
 				new_project.created_at = datetime.datetime.now()
 				new_project.updated_at = datetime.datetime.now()
 				new_project.createdBy.add(request.user)
+				print("Saving the new group")
 				new_project.save()
 				request.user.save()
 				context = {
@@ -65,6 +79,7 @@ def getProjectForm(request):
 				}
 				return render(request, 'projectformsuccess.html', context)
 		else:
+			print("Method is not post")
 			form = forms.ProjectForm()
 		return render(request, 'projectform.html')
 	# render error page if user is not logged in
