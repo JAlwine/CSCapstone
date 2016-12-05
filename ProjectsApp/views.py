@@ -54,24 +54,17 @@ def getProjectForm(request):
 def getProjectFormSuccess(request):
 	print("In function")
 	if request.user.is_authenticated():
-		print("User is Authenticated")
 		if request.method == 'POST':
-			print("Method is post")
 			form = forms.ProjectForm(request.POST)
-			print("Form is " + str(form.is_valid()))
 			print(form.errors)
 			if form.is_valid():
-				print("Form is valid")
 				if models.Project.objects.filter(name__exact=form.cleaned_data['name']).exists():
-					print("Group does not exist")
 					return render(request, 'projectform.html', {'error': 'Error: That Project name already exists!'})
 				new_project = models.Project(name=form.cleaned_data['name'], description=form.cleaned_data['description'],
 											 languages=form.cleaned_data['languages'], experience=form.cleaned_data['experience'],
-											 speciality=form.cleaned_data['speciality'], createdBy=request.user)
-				print("Creating a new group")
+											 speciality=form.cleaned_data['speciality'], createdBy=request.user.email)
 				new_project.created_at = datetime.datetime.now()
 				new_project.updated_at = datetime.datetime.now()
-				print("Saving the new group")
 				new_project.save()
 				request.user.save()
 				context = {
@@ -79,8 +72,6 @@ def getProjectFormSuccess(request):
 				}
 				return render(request, 'projectformsuccess.html', context)
 		else:
-			print("Method is not post")
-
 			form = forms.ProjectForm()
 		return render(request, 'projectform.html')
 	# render error page if user is not logged in

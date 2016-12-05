@@ -14,7 +14,7 @@ class Project(models.Model):
     languages = models.CharField(max_length=200, default="/")
     experience = models.CharField(max_length=200, default=0)
     speciality = models.CharField(max_length=200, default="/")
-    createdBy = models.ForeignKey('AuthenticationApp.MyUser')
+    createdBy = models.CharField(max_length=200, default="/")
     #add a foreign key company field here
 
     # TODO Task 3.5: Add field for company relationship
