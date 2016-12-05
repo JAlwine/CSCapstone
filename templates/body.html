@@ -49,6 +49,17 @@
 							<li><a href="/group/form">Create Group</a></li>
 						</ul>
 					</li>
+                    {% if user.user_type == "ENG" %}
+                    <li role="presentation" class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+						  Projects <span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="/project/form">Create new Project</a></li>
+							<li><a href="/project/all">View Projects</a></li>
+						</ul>
+					</li>
+                    {% endif %}
 					<li><a href="/logout">Logout</a></li>
 				{% endif %}
 				</ul>
