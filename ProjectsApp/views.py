@@ -59,6 +59,7 @@ def getProjectFormSuccess(request):
 			print("Method is post")
 			form = forms.ProjectForm(request.POST)
 			print("Form is " + str(form.is_valid()))
+			print(form.errors)
 			if form.is_valid():
 				print("Form is valid")
 				if models.Project.objects.filter(name__exact=form.cleaned_data['name']).exists():
@@ -80,6 +81,7 @@ def getProjectFormSuccess(request):
 				return render(request, 'projectformsuccess.html', context)
 		else:
 			print("Method is not post")
+
 			form = forms.ProjectForm()
 		return render(request, 'projectform.html')
 	# render error page if user is not logged in
