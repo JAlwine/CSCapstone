@@ -33,11 +33,9 @@ def getProfile(request):
     if request.user.is_authenticated():
         in_email = request.GET.get('email', 'None')
         this_user = MyUser.objects.get(email__exact=in_email)
-        this_student = Student.objects.get(user_id__exact=this_user.id)
 
         context = {
-            'user' : this_user,
-            'student' : this_student,
+            'profile' : this_user,
         }
 
         if (this_user.user_type == "PROF"):
@@ -46,6 +44,12 @@ def getProfile(request):
         elif (this_user.user_type == "ENG"):
             return render(request, 'engineerProfile.html', context)
         else: # Student
+            this_student = Student.objects.get(user_id__exact=this_user.id)
+
+            context = {
+                'profile': this_user,
+                'student': this_student,
+            }
             return render(request, 'studentProfile.html', context)
 
     # render error page if user is not logged in
