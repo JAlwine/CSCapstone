@@ -20,14 +20,14 @@ def getProjects(request):
 def getProject(request):
 	in_name = request.GET.get('name', None)
 	in_project = models.Project.objects.get(name__exact=in_name)
-	is_member = in_project.createdBy.filter(email__exact=request.user.email)
+	#is_member = in_project.objects.filter(email__exact=request.user.email)
 	groups_list = Group.objects.all()
-	assigned_groups = in_project.project_groups.all()
+	#assigned_groups = in_project.project_groups.all()
 	context = {
 		'project': in_project,
-		'userIsMember': is_member,
+		#'userIsMember': is_member,
 		'groups_list': groups_list,
-		'assigned_groups': assigned_groups
+		#'assigned_groups': assigned_groups
 	}
 	if request.method == 'POST':
 		group_names = request.POST.getlist('dropdownl', 'None')

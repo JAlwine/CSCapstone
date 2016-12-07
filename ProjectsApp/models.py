@@ -20,20 +20,6 @@ class Project(models.Model):
     # TODO Task 3.5: Add field for company relationship
     # TODO Task 3.5: Add fields for project qualifications (minimum required: programming language, years of experience, speciality)
 
-    def create_project(self, name=None, description=None, created_at=str(datetime.datetime.now()),
-                       updated_at=str(datetime.datetime.now()), languages=None, experience=None,
-                       specialty=None, createdBy=None):
-
-        self.name = name
-        self.description = description
-        self.created_at = created_at
-        self.updated_at = updated_at
-        self.languages = languages
-        self.experience = experience
-        self.specialty = specialty
-        self.createdBy = createdBy
-        self.save()
-        return self
 
 
     def __str__(self):
