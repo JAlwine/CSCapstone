@@ -179,6 +179,7 @@ class Teacher(models.Model):
         MyUser,
         on_delete=models.CASCADE,
         primary_key=True)
+    photo = '0';
 
     def get_full_name(self):
         return "%s %s" % (self.user.first_name, self.user.last_name)
