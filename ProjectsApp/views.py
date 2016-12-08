@@ -7,6 +7,10 @@ from django.shortcuts import render
 from . import models
 from . import forms
 from GroupsApp.models import Group
+from AuthenticationApp.models import Bookmark
+from AuthenticationApp.models import MyUser
+from ProjectsApp.models import Project
+
 import datetime
 
 def getProjects(request):
@@ -15,19 +19,50 @@ def getProjects(request):
 		'projects': projects_list,
 	})
 
+def getBookmarks(request):
+	if (request.user.is_authenticated()):
+		bookmarks_list = Bookmark.objects.all()
+		pIdsToGet = [bookmark.projectID for bookmark in bookmarks_list if bookmark.userID == request.user.id]
+		projects_list = Project.objects.filter(id__in=pIdsToGet)
+		context = {
+			'projects' : projects_list
+		}
+		return render(request, 'bookmarks.html', context)
+	return render(request, 'autherror.html')
 
+
+def bookmarkProject(request):
+	if (request.user.is_authenticated()):
+		in_projectName = request.GET.get('name', 'None')
+		in_project = Project.objects.get(name__exact=in_projectName)
+		in_user = MyUser.objects.get(email__exact=request.user.email)
+		try:
+			this_bookmark = Bookmark.objects.get(userID=request.user.id, projectID=in_project.id)
+			this_bookmark.delete()
+		except:
+			in_bookmark = Bookmark()
+			in_bookmark.projectID = in_project.id
+			in_bookmark.userID = in_user.id
+			in_bookmark.save()
+
+		context = {
+			'project' : in_project
+		}
+		return render(request, 'project.html', context)
+
+	return render(request, 'autherror.html')
 
 def getProject(request):
 	in_name = request.GET.get('name', None)
 	in_project = models.Project.objects.get(name__exact=in_name)
-	is_member = in_project.createdBy.filter(email__exact=request.user.email)
+	is_member = in_project.createdBy
 	groups_list = Group.objects.all()
-	assigned_groups = in_project.project_groups.all()
+	# assigned_groups = in_project.project_groups.all()
 	context = {
 		'project': in_project,
 		'userIsMember': is_member,
 		'groups_list': groups_list,
-		'assigned_groups': assigned_groups
+		# 'assigned_groups': assigned_groups
 	}
 	if request.method == 'POST':
 		group_names = request.POST.getlist('dropdownl', 'None')

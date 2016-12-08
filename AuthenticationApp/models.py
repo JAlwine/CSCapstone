@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+
 # from django.db.models.signals import post_save
 
 # Create your models here.
@@ -26,6 +27,7 @@ class MyUserManager(BaseUserManager):
         user.about_user=about_user
 
         user.set_password(password)
+
 
         # If first_name is not present, set it as email's username by default
         if first_name is None or first_name == "" or first_name == '':
@@ -167,6 +169,10 @@ class Student(models.Model):
     def is_staff(self):
         return False
 
+class Bookmark(models.Model):
+    userID = models.IntegerField(null=True, blank=True)
+    projectID = models.IntegerField(null=True, blank=True)
+
 
 class Teacher(models.Model):
     user = models.OneToOneField(
@@ -224,7 +230,3 @@ class Engineer(models.Model):
     def is_staff(self):
         #is engineer type-staff or type-engineer?
         return True
-
-class Bookmark(models.Model):
-    user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
-    project = models.ManyToManyField('ProjectsApp.Project')

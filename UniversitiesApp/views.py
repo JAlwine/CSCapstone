@@ -75,7 +75,8 @@ def joinUniversity(request):
         }
         return render(request, 'university.html', context)
     return render(request, 'autherror.html')
-    
+
+
 def unjoinUniversity(request):
     if request.user.is_authenticated():
         in_name = request.GET.get('name', 'None')

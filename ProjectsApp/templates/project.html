@@ -7,15 +7,15 @@
 		<div class="jumbotron">
 			<h1>{{ project.name }}</h1>
 			<p>{{ project.description }}</p>
+            <a href="/project/bookmark?name={{ project.name }}" class="btn btn-default">Bookmark</a>
         </div>
 	</div>
-
 	<div class="container">
 		<div class="table-responsive">
 			<table class="table table-striped sortable">
 				<thead>
 					<tr>
-						<th>Projects</th>
+						<th>Members</th>
 					</tr>
 				</thead>
 				<tbody>

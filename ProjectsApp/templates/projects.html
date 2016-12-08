@@ -9,13 +9,15 @@
 				<thead>
 					<tr>
 						<th>Project Name</th>
+                        <th>Description</th>
 					</tr>
 				</thead>
 				<tbody>
 					{% for project in projects %}
 					<tr>
-						<td>{{ project.name }}</td>
-					</tr>
+                        <td><a href="/project?name={{ project.name }}">{{ project.name }}</a></td>
+                        <td><p>{{ project.description }}</p></td>
+                    </tr>
 					{% endfor %}
 				</tbody>
 			</table>
