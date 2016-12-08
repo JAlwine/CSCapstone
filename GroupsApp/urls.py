@@ -3,6 +3,7 @@
 Created by Naman Patwari on 10/10/2016.
 """
 from django.conf.urls import url
+from ProjectsApp.models import Project
 
 from . import views
 
