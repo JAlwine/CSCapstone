@@ -7,6 +7,7 @@
 		<div class="jumbotron">
 			<h1>{{ group.name }}</h1>
 			<p>{{ group.description }}</p>
+            <p>Group Experience: {{ group.experience }}</p>
 			{% if userIsMember %}
 			<a href="/group/unjoin?name={{ group.name }}" class="btn btn-default">Unjoin this Group</a>
 			{% else %}
@@ -28,6 +29,33 @@
 					<tr>
 						<td>{{ item.get_full_name }}</td>
 					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+    <div class="container">
+		<div class="table-responsive">
+			<table class="table table-striped sortable">
+				<thead>
+					<tr>
+						<th>Suggested Projects</th>
+                        <th>Required Experience</th>
+                        <th>Group's Experience</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for project in projects %}
+          <!--  this is what needs to happen, just cant get project values here
+          tried importing Project from ProjectsApp to every file in groups -->
+                       {% if project.experience < group.experience %}
+					<tr>
+						 <td><a href="/project?name={{ project.name }}"> {{ project.name }}</a></td>
+                         <td>{{ project.experience }}</td>
+                         <td>{{ group.experience }}</td>
+					</tr>
+                        {%  endif %}
+
 					{% endfor %}
 				</tbody>
 			</table>

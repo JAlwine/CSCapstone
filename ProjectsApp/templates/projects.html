@@ -9,15 +9,19 @@
 				<thead>
 					<tr>
 						<th>Project Name</th>
-                        <th>Description</th>
+                        <th>Project Creator</th>
+                        <th>Date Created</th>
+                        <th>Date Last Updated</th>
 					</tr>
 				</thead>
 				<tbody>
 					{% for project in projects %}
 					<tr>
-                        <td><a href="/project?name={{ project.name }}">{{ project.name }}</a></td>
-                        <td><p>{{ project.description }}</p></td>
-                    </tr>
+						 <td><a href="/project?name={{ project.name }}"> {{ project.name }}</a></td>
+                        <td> {{ project.createdBy }} </td>
+                        <td> {{ project.created_at }}</td>
+                        <td> {{ project.updated_at }}</td>
+					</tr>
 					{% endfor %}
 				</tbody>
 			</table>

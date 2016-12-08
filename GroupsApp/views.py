@@ -5,6 +5,7 @@ from django.shortcuts import render
 
 from . import models
 from . import forms
+from ProjectsApp.models import Project
 
 def getGroups(request):
     if request.user.is_authenticated():
@@ -21,9 +22,11 @@ def getGroup(request):
         in_name = request.GET.get('name', 'None')
         in_group = models.Group.objects.get(name__exact=in_name)
         is_member = in_group.members.filter(email__exact=request.user.email)
+        projects = Project.objects.all()
         context = {
             'group' : in_group,
             'userIsMember': is_member,
+            'projects' : projects
         }
         return render(request, 'group.html', context)
     # render error page if user is not logged in
@@ -42,7 +45,8 @@ def getGroupFormSuccess(request):
             if form.is_valid():
                 if models.Group.objects.filter(name__exact=form.cleaned_data['name']).exists():
                     return render(request, 'groupform.html', {'error' : 'Error: That Group name already exists!'})
-                new_group = models.Group(name=form.cleaned_data['name'], description=form.cleaned_data['description'])
+                new_group = models.Group(name=form.cleaned_data['name'], description=form.cleaned_data['description'],
+                                         experience = form.cleaned_data['experience'])
                 new_group.save()
                 context = {
                     'name' : form.cleaned_data['name'],
