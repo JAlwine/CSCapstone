@@ -63,12 +63,14 @@ def joinGroup(request):
         in_name = request.GET.get('name', 'None')
         in_group = models.Group.objects.get(name__exact=in_name)
         in_group.members.add(request.user)
+        projects = Project.objects.all()
         in_group.save();
         request.user.group_set.add(in_group)
         request.user.save()
         context = {
             'group' : in_group,
             'userIsMember': True,
+            'projects' : projects
         }
         return render(request, 'group.html', context)
     return render(request, 'autherror.html')
@@ -78,12 +80,14 @@ def unjoinGroup(request):
         in_name = request.GET.get('name', 'None')
         in_group = models.Group.objects.get(name__exact=in_name)
         in_group.members.remove(request.user)
+        projects = Project.objects.all()
         in_group.save();
         request.user.group_set.remove(in_group)
         request.user.save()
         context = {
             'group' : in_group,
             'userIsMember': False,
+            'projects' : projects
         }
         return render(request, 'group.html', context)
     return render(request, 'autherror.html')

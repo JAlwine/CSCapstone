@@ -4,6 +4,7 @@ Created by Naman Patwari on 10/10/2016.
 """
 from django import forms
 from ProjectsApp.models import Project
+from CommentsApp.models import Comment
 
 
 class GroupForm(forms.Form):
