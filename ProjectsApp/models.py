@@ -13,7 +13,7 @@ class Project(models.Model):
     created_at = models.DateTimeField('date created')
     updated_at = models.DateTimeField('date updated')
     languages = models.CharField(max_length=200, default="/")
-    experience = models.CharField(max_length=200, default=0)
+    experience = models.IntegerField(max_length=200, default=0)
     speciality = models.CharField(max_length=200, default="/")
     createdBy = models.CharField(max_length=200, default="/")
     #add a foreign key company field here

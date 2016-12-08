@@ -40,18 +40,22 @@
 				<thead>
 					<tr>
 						<th>Suggested Projects</th>
+                        <th>Required Experience</th>
+                        <th>Group's Experience</th>
 					</tr>
 				</thead>
 				<tbody>
 					{% for project in projects %}
           <!--  this is what needs to happen, just cant get project values here
-          tried importing Project from ProjectsApp to every file in groups
-                        {% if project.experience <= group.experience %}
+          tried importing Project from ProjectsApp to every file in groups -->
+                       {% if project.experience < group.experience %}
 					<tr>
 						 <td><a href="/project?name={{ project.name }}"> {{ project.name }}</a></td>
+                         <td>{{ project.experience }}</td>
+                         <td>{{ group.experience }}</td>
 					</tr>
                         {%  endif %}
-                        -->
+
 					{% endfor %}
 				</tbody>
 			</table>

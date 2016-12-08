@@ -12,6 +12,7 @@ class Group(models.Model):
     description = models.CharField(max_length=300)
     experience = models.IntegerField(default='0')
     members = models.ManyToManyField(MyUser)
+    project = models.ManyToManyField(Project)
 
   #  def get_experience(self):
   #      return self.experience
