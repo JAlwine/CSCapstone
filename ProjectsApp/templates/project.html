@@ -9,6 +9,7 @@
 			<p>{{ project.description }}</p>
             <h5>Required Experience: {{ project.experience }}</h5>
             <a href="/project/bookmark?name={{ project.name }}" class="btn btn-default">Bookmark</a>
+            <a href="/project/remove?name={{ project.name }}" class="btn btn-default">Remove Project</a>
         </div>
 	</div>
 	<div class="container">
@@ -47,7 +48,7 @@
                         <td>{{ comment.user }}</td>
                         <td>{{ comment.createdat }}</td>
                         {% if currentUser == comment.user.id or currentUser.user_type == "None"%}
-                        <td><a href="/projectcommentremove?id={{ comment.commentid }}&rdr={{ project.name }}">delete</a></td>
+                        <td><a href="/project/removecomment?id={{ comment.commentid }}&rdr={{ project.name }}">delete</a></td>
                         {% endif %}
                     </tr>
                     {% endfor %}

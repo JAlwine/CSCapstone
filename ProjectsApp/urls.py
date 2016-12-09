@@ -13,7 +13,8 @@ urlpatterns = [
     url(r'^project/formsuccess$', views.getProjectFormSuccess, name='ProjectFormSuccess'),
     url(r'^project/bookmarks$', views.getBookmarks),
     url(r'^project/bookmark$', views.bookmarkProject, name='BookmarkProject'),
-    url(r'^project', views.getProject, name='Project'),
-    url(r'^projectcommentremove$', views.removeProjectComment, name='removeProjectComment'),
+    url(r'^project/removecomment$', views.removeProjectComment, name='removeProjectComment'),
     url(r'^project/comment$', views.getProjectComment, name='getProjectComment'),
+    url(r'^project/remove$', views.removeProject, name="removeProject"),
+    url(r'^project', views.getProject, name='Project'),
 ]

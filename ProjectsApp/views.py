@@ -118,3 +118,17 @@ def getProjectFormSuccess(request):
 	# render error page if user is not logged in
 	return render(request, 'autherror.html')
 
+def removeProject(request):
+	if request.user.is_authenticated():
+		in_project_name = request.GET.get('name', 'None')
+		in_project = models.Project.objects.get(name__exact=in_project_name)
+		in_project.delete()
+
+		projects_list = models.Project.objects.all()
+		return render(request, 'projects.html', {
+			'projects': projects_list,
+		})
+
+	return render(request, 'autherror.html')
+
+
