@@ -13,6 +13,12 @@ from ProjectsApp.models import Project
 
 import datetime
 
+def removeProjectComment(request):
+	return 0
+
+def getProjectComment(request):
+	return 0
+
 def getProjects(request):
 	projects_list = models.Project.objects.all()
 	return render(request, 'projects.html', {
@@ -111,5 +117,4 @@ def getProjectFormSuccess(request):
 		return render(request, 'projectform.html')
 	# render error page if user is not logged in
 	return render(request, 'autherror.html')
-
 

@@ -29,5 +29,36 @@
 			</table>
 		</div>
 	</div>
+        <div class="container">
+        <div class="table-responsive">
+			<table class="table table-striped sortable">
+				<thead>
+					<tr>
+						<th>Comment</th>
+                        <th>Posted By</th>
+                        <th>Comment Posted At</th>
+                        <th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+                    {% for comment in comments %}
+                    <tr>
+                        <td><p>{{ comment.comment }}</p></td>
+                        <td>{{ comment.user }}</td>
+                        <td>{{ comment.createdat }}</td>
+                        {% if currentUser == comment.user.id or currentUser.user_type == "None"%}
+                        <td><a href="/projectcommentremove?id={{ comment.commentid }}&rdr={{ project.name }}">delete</a></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+				</tbody>
+			</table>
+            <form method="POST" action="/project/comment?id={{ group.id }}" class="panel-body validate"> {% csrf_token %}
+                {{ form.as_p }}
+                <input type="text" name="comment" id="comment" placeholder="comment" class="form-control" data-bvalidator="required" data-bvalidator-msg="comment">
+	            <input type="submit" class='btn btn-primary' value="comment">
+            </form>
+		</div>
+	</div>
 
 {% endblock %}

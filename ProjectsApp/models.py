@@ -4,6 +4,7 @@ Created by Harris Christiansen on 10/02/16.
 """
 from django.db import models
 from AuthenticationApp.models import MyUser
+from CommentsApp.models import Comment
 
 import datetime
 
@@ -25,3 +26,14 @@ class Project(models.Model):
 
     def __str__(self):
         return self.name
+
+class ProjectComment(models.Model):
+    commentid = models.AutoField(primary_key=True)
+    user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    comment = models.CharField(max_length=200, null=True, blank=True, )
+    createdat = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+

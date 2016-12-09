@@ -46,9 +46,7 @@
 				</thead>
 				<tbody>
 					{% for project in projects %}
-          <!--  this is what needs to happen, just cant get project values here
-          tried importing Project from ProjectsApp to every file in groups -->
-                       {% if project.experience <= group.experience %}
+                        {% if project.experience <= group.experience %}
 					<tr>
 						 <td><a href="/project?name={{ project.name }}"> {{ project.name }}</a></td>
                          <td>{{ project.experience }}</td>
@@ -58,6 +56,37 @@
 					{% endfor %}
 				</tbody>
 			</table>
+		</div>
+	</div>
+    <div class="container">
+        <div class="table-responsive">
+			<table class="table table-striped sortable">
+				<thead>
+					<tr>
+						<th>Comment</th>
+                        <th>Posted By</th>
+                        <th>Comment Posted At</th>
+                        <th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+                    {% for comment in comments %}
+                    <tr>
+                        <td><p>{{ comment.comment }}</p></td>
+                        <td>{{ comment.user }}</td>
+                        <td>{{ comment.createdat }}</td>
+                        {% if currentUser == comment.user.id or currentUser.user_type == "None"%}
+                        <td><a href="/groupcommentremove?id={{ comment.commentid }}&rdr={{ group.name }}">delete</a></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+				</tbody>
+			</table>
+            <form method="POST" action="/group/comment?id={{ group.id }}" class="panel-body validate"> {% csrf_token %}
+                {{ form.as_p }}
+                <input type="text" name="comment" id="comment" placeholder="comment" class="form-control" data-bvalidator="required" data-bvalidator-msg="comment">
+	            <input type="submit" class='btn btn-primary' value="comment">
+            </form>
 		</div>
 	</div>
 

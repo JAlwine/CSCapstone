@@ -9,6 +9,8 @@
 				<thead>
 					<tr>
 						<th>Project Name</th>
+                        <th>Project Description</th>
+                        <th>Experience Required</th>
                         <th>Project Creator</th>
                         <th>Date Created</th>
                         <th>Date Last Updated</th>
@@ -18,6 +20,8 @@
 					{% for project in projects %}
 					<tr>
 						 <td><a href="/project?name={{ project.name }}"> {{ project.name }}</a></td>
+                        <td> {{ project.description|safe }} </td>
+                        <td> {{ project.experience }} </td>
                         <td> {{ project.createdBy }} </td>
                         <td> {{ project.created_at }}</td>
                         <td> {{ project.updated_at }}</td>

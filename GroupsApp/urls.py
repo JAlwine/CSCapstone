@@ -15,4 +15,6 @@ urlpatterns = [
     url(r'^group/unjoin$', views.unjoinGroup, name='GUnjoin'),
     url(r'^group/remove$', views.removeGroup, name='GRemove'),
     url(r'^group$', views.getGroup, name='Group'),
+    url(r'^groupcommentremove$', views.removeGroupComment, name='removeGroupComment'),
+    url(r'^group/comment$', views.getGroupComment, name='getGroupComment'),
 ]

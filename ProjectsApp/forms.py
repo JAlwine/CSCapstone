@@ -5,6 +5,7 @@ Created by Naman Patwari on 10/10/2016.
 from django import forms
 from .models import Project
 from AuthenticationApp.models import MyUser
+from CommentsApp.models import Comment
 
 class ProjectForm(forms.Form):
     name = forms.CharField(label='Name', max_length=30)
@@ -20,3 +21,12 @@ class UpdateForm(forms.ModelForm):
         widgets = {
             'description':forms.Textarea()
         }
+
+class CommentForm(forms.Form):
+    comment = forms.CharField(
+        label="Comment", widget=forms.Textarea, required=False)
+
+    class Meta:
+        model = Comment
+        fields = ('comment')
+        widgets = {'comment': forms.Textarea()}
