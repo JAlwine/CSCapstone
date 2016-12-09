@@ -75,7 +75,7 @@
                         <td><p>{{ comment.comment }}</p></td>
                         <td>{{ comment.user }}</td>
                         <td>{{ comment.createdat }}</td>
-                        {% if currentUser == comment.user.id or currentUser.user_type == "None"%}
+                        {% if currentUser.id == comment.user.id or currentUser.user_type == "None"%}
                         <td><a href="/groupcommentremove?id={{ comment.commentid }}&rdr={{ group.name }}">delete</a></td>
                         {% endif %}
                     </tr>

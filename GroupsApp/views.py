@@ -46,7 +46,7 @@ def getGroup(request):
             'userIsMember': is_member,
             'projects' : projects,
             'comments' : comments,
-            'currentUser': request.user.id
+            'currentUser': request.user
         }
         return render(request, 'group.html', context)
     # render error page if user is not logged in

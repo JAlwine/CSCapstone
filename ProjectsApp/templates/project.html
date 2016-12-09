@@ -9,7 +9,9 @@
 			<p>{{ project.description }}</p>
             <h5>Required Experience: {{ project.experience }}</h5>
             <a href="/project/bookmark?name={{ project.name }}" class="btn btn-default">Bookmark</a>
-            <a href="/project/remove?name={{ project.name }}" class="btn btn-default">Remove Project</a>
+            {% if userIsMember %}
+                <a href="/project/remove?name={{ project.name }}" class="btn btn-default">Remove Project</a>
+            {% endif %}
         </div>
 	</div>
 	<div class="container">
