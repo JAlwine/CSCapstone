@@ -91,4 +91,17 @@ def unjoinGroup(request):
         }
         return render(request, 'group.html', context)
     return render(request, 'autherror.html')
+
+def removeGroup(request):
+    if request.user.is_authenticated():
+        in_group_name = request.GET.get('name', 'None')
+        in_group = models.Group.objects.get(name__exact=in_group_name)
+        in_group.delete()
+
+        groups_list = models.Group.objects.all()
+        context = {
+            'groups': groups_list,
+        }
+        return render(request, 'groups.html', context)
+    return render(request, 'autherror.html')
     
